@@ -66,12 +66,16 @@ module ActiveAdminImport
       end
 
       action_item :import, only: :index, if: options[:if] do
-        if authorized?(ActiveAdminImport::Auth::IMPORT, active_admin_config.resource_class)
-          link_to(
-            I18n.t('active_admin_import.import_model', plural_model: options[:plural_resource_label]),
-            action: :import
-          )
-        end
+        return unless  authorized?(ActiveAdminImport::Auth::IMPORT, active_admin_config.resource_class)
+
+        import_button_label = options[:import_button_label].presence || I18n.t(
+          'active_admin_import.import_model', plural_model: options[:plural_resource_label]
+        )
+
+        link_to(
+          import_button_label,
+          action: :import
+        )
       end
 
       collection_action :do_import, method: :post do

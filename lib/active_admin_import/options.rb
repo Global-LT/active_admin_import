@@ -21,7 +21,8 @@ module ActiveAdminImport
       :plural_resource_label,
       :error_limit,
       :headers_rewrites,
-      :if
+      :if,
+      :import_button_label
     ].freeze
 
     def self.options_for(config, options = {})
